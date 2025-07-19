@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Check, X, FileText } from "lucide-react"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Check, X, FileText, Eye } from "lucide-react"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 import userAvatar1 from "@/assets/user-avatar-1.jpg"
@@ -136,6 +137,28 @@ export function PendingRequests() {
               
               {request.status === "pending" && (
                 <div className="flex gap-2">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 px-3"
+                      >
+                        <Eye className="h-3 w-3 mr-1" />
+                        View Photo
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-3xl">
+                      <div className="flex flex-col items-center space-y-4">
+                        <h3 className="text-lg font-semibold">{request.documentTitle}</h3>
+                        <img
+                          src={request.documentPreview}
+                          alt={request.documentTitle}
+                          className="max-w-full max-h-[70vh] object-contain rounded-lg border border-border"
+                        />
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                   <Button
                     variant="success"
                     size="sm"
